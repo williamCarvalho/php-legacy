@@ -2,7 +2,7 @@
 
 # 🔄 Projeto de Modernização de Legado: Monolito PHP Orientado a Objetos para API REST + SPA Moderna
 
-Este repositório demonstra a estratégia de refatoração e modernização de um sistema legado monolítico em PHP OO, transformando-o em uma arquitetura desacoplada baseada em **API RESTful (PHP Nativo)** consumida por um **Painel SPA em React**.
+Este repositório demonstra a estratégia de refatoração e modernização de um sistema legado monolítico em PHP OO, transformando-o em uma arquitetura desacoplada baseada em **API RESTful (PHP Nativo)** consumida por um **Frontend SPA em React**.
 
 ---
 
@@ -32,10 +32,26 @@ Este repositório demonstra a estratégia de refatoração e modernização de u
 
 ## 🛠️ Conjunto de tecnologias
 
-- **Legado & API Backend:** PHP Nativo (POO, PSR standards, PDO)
-- **Frontend Moderno:** React / Vue.js, Tailwind CSS (ou MUI), Axios/Fetch
-- **Banco de Dados:** MySQL / PostgreSQL
-- **Padrões e Princípios:** REST, MVC / Repository Pattern, SOLID (Single Responsibility e Dependency Inversion)
+O projeto está dividido em uma arquitetura de monorepo demonstrando a evolução de um sistema monolítico legado para uma arquitetura moderna desacoplada:
+
+### 1. Monolito Legado (`/01-legacy`)
+
+- **Linguagem:** PHP (Procedural/OO)
+- **Banco de Dados:** MySQL (PDO)
+- **Interface:** HTML5 / CSS3 com Bootstrap 5
+
+### 2. API REST Moderna (`/02-modern-api`)
+
+- **Linguagem:** PHP 8+ (OO)
+- **Arquitetura:** Front Controller, Repository Pattern e Princípios SOLID
+- **Banco de Dados:** MySQL (PDO e tratamento de exceções)
+- **Comunicação:** API RESTful com suporte a CORS e payload JSON
+
+### 3. Frontend SPA Moderno (`/03-frontend`)
+
+- **Framework:** React (Vite)
+- **UI Library:** Material UI (MUI)
+- **Gerenciamento de Estado & Requisições:** Hooks nativos (`useState`, `useEffect`, `useCallback`) e API Fetch nativa com variáveis de ambiente (`.env`)
 
 ---
 
@@ -49,10 +65,26 @@ Este repositório demonstra a estratégia de refatoração e modernização de u
 
 ## 📂 Visão Geral do Código
 
-### Trecho Legado (`01-legacy/src/UserProcess.php`)
+### Monolito Legado (`01-legacy/index.php`)
 
-_(Trecho exemplificando a mistura de HTML, processamento POST direto e consultas SQL)_
+_(Demonstra a mistura de HTML, processamento de formulário POST e consultas SQL diretas no mesmo arquivo)_
 
-### Trecho Modernizado (`02-modern-api/src/Controllers/UserController.php`)
+### Backend Moderno - Roteamento (`02-modern-api/public/index.php`)
+
+_(Ponto de entrada único responsável pelo tratamento de CORS, normalização de URIs e despacho de requisições)_
+
+### Backend Moderno - Conexão (`02-modern-api/src/database.php`)
+
+_(Gerenciamento centralizado da conexão com o banco de dados utilizando PDO)_
+
+### Backend Moderno - Repositório (`02-modern-api/src/order-repository.php`)
+
+_(Isolamento da persistência de dados e queries SQL protegidas com Prepared Statements)_
+
+### Backend Moderno - Controller (`02-modern-api/src/order-controller.php`)
 
 _(Trecho mostrando tratamento de requisição REST, validação e resposta JSON com status HTTP adequados)_
+
+### Frontend SPA Moderno (`03-frontend/src/App.jsx`)
+
+_(Interface em React com Material UI gerindo estados reativos, formulários e consumo assíncrono via Fetch)_

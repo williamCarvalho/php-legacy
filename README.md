@@ -2,7 +2,7 @@
 
 # 🔄 Legacy Modernization Project: PHP OO Monolith to REST API + Modern SPA
 
-This repository demonstrates the refactoring and modernization strategy of a legacy monolithic PHP OO system, transforming it into a decoupled architecture based on a **RESTful API (Native PHP)** consumed by a **SPA Panel in React**.
+This repository demonstrates the refactoring and modernization strategy of a legacy monolithic PHP system, transforming it into a decoupled architecture based on a **RESTful API (Native PHP)** consumed by a **SPA Frontend in React**.
 
 ---
 
@@ -32,10 +32,26 @@ This repository demonstrates the refactoring and modernization strategy of a leg
 
 ## 🛠️ Tech Stack
 
-- **Legacy & Backend API:** Native PHP (POO, PSR standards, PDO)
-- **Modern Frontend:** React / Vue.js, Tailwind CSS (or MUI), Axios/Fetch
-- **Database:** MySQL / PostgreSQL
-- **Standards and Principles:** REST, MVC / Repository Pattern, SOLID (Single Responsibility and Dependency Inversion)
+The project is structured as a monorepo, demonstrating the evolution from a legacy monolithic system to a modern, decoupled architecture:
+
+### 1. Monolito Legado (`/01-legacy`)
+
+- **Language:** PHP (procedural/OO)
+- **Database:** MySQL (PDO)
+- **Interface:** HTML5 / CSS3 with Bootstrap 5
+
+### 2. Modern REST API (`/02-modern-api`)
+
+- **Language:** PHP 8+ (OO)
+- **Architecture:** Front Controller, Repository Pattern and SOLID Principles
+- **Database:** MySQL (PDO and exception handling)
+- **Communication:** RESTful API with CORS support and JSON payload
+
+### 3. Modern SPA Frontend (`/03-frontend`)
+
+- **Framework:** React (Vite)
+- **UI Library:** Material UI (MUI)
+- **State Management and Requests:** Native hooks (`useState`, `useEffect`, `useCallback`) and the native Fetch API with environment variables (`.env`)
 
 ---
 
@@ -49,10 +65,26 @@ This repository demonstrates the refactoring and modernization strategy of a leg
 
 ## 📂 Code Overview
 
-### Legacy Excerpt (`01-legacy/src/UserProcess.php`)
+### Legacy Monolith (`01-legacy/index.php`)
 
-_(Excerpt illustrating the mix of HTML, direct POST processing, and SQL queries)_
+_(Demonstrates a mix of HTML, POST form processing and direct SQL queries within the same file)_
 
-### Modernized Excerpt (`02-modern-api/src/Controllers/UserController.php`)
+### Modern Backend - Routing (`02-modern-api/public/index.php`)
 
-_(Excerpt showing REST request handling, validation, and a JSON response with appropriate HTTP status codes)_
+_(Single entry point responsible for handling CORS, normalizing URIs, and dispatching requests)_
+
+### Modern Backend - Connection (`02-modern-api/src/database.php`)
+
+_(Centralized database connection management using PDO)_
+
+### Modern Backend - Repository (`02-modern-api/src/order-repository.php`)
+
+_(Isolation of data persistence and SQL queries secured with Prepared Statements)_
+
+### Modern Backend - Controller (`02-modern-api/src/order-controller.php`)
+
+_(Snippet showing REST request handling, validation, and a JSON response with appropriate HTTP status codes)_
+
+### Modern SPA Frontend (`03-frontend/src/App.jsx`)
+
+_(React interface using Material UI (MUI), managing reactive state, forms and asynchronous data consumption via Fetch)_
